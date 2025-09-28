@@ -1,0 +1,271 @@
+<!-- add product -->
+<!--
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { DashBordServiceService } from '../../service/dash-bord-service.service';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { title } from 'process';
+
+@Component({
+  selector: 'app-add-product',
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterLink],
+  templateUrl: './add-product.component.html',
+  styleUrl: './add-product.component.css'
+})
+export class AddProductComponent implements OnInit {
+  productId:any;
+  productData:any={
+  title: "",
+  price:null,
+  description: "A description",
+  categoryId: 0,
+  images: [""]
+}
+myCategory:any;
+
+  constructor(public service:DashBordServiceService,public activatedRoat:ActivatedRoute,public router:Router){
+    this.productId = Number(this.activatedRoat.snapshot.params['id']);
+
+}
+  ngOnInit(): void {
+    console.log(this.productId)
+
+    this.getAllCategory();
+  if (this.productId != 0) {
+    this.service.getProductById(this.productId).subscribe({
+      next: (res) => {console.log(res);
+        this.productData = res
+        this.productData.categoryId = res
+      },
+      error: (err) => {alert("error")
+        console.log("error")
+
+      }
+    });
+  }
+  if(this.productId!=0){
+      console.log(this.productData)
+    }
+}
+getAllCategory(){
+    this.service.getAllCategory().subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.myCategory=res;
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    }
+  )
+  }
+
+onSubmit(form: any) {
+  if (form.valid) {
+
+    if (this.productId == 0) {
+      const body = {
+      title: this.productData.title,
+      price: Number(this.productData.price),
+      description: this.productData.description || "No description",
+      categoryId: Number(this.productData.categoryId),
+      images: [this.productData.images[0]]
+    };
+
+      console.log(body);
+      this.service.addproduct(body).subscribe({
+        next: () => this.router.navigate(['/dashBord']),
+        error: (err) => console.error("Add product error:", err)
+      });
+    } else {
+      const body = {
+        title: this.productData.title,
+        price: Number(this.productData.price)
+      };
+      this.service.editProduct(body, this.productId).subscribe({
+        next: () => this.router.navigate(['/dashBord']),
+        error: (err) => console.error("Edit product error:", err)
+      });
+    }
+  }
+}
+
+
+} -->
+
+<!-- <div class="cotainer">
+  <form class="form-group " #myform="ngForm" (ngSubmit)="onSubmit(myform)">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" name="title" id="title" ngModel #title="ngModel" class="form-control "
+      minlength="3" required="" [(ngModel)]="productData.title" placeholder="Enter the product Title">
+      <p *ngIf="title.errors?.['required']&&(title.touched||myform.submitted)" class="text-danger">Title is required</p>
+
+    <label for="price" class="form-label mt-3">Price</label>
+    <input type="number" name="price" id="price" ngModel #price="ngModel" class="form-control "
+      minlength="3" required="" [(ngModel)]="productData.price" placeholder="Enter the product price">
+      <p *ngIf="price.errors?.['required']&&(price.touched||myform.submitted)" class="text-danger">price is required</p>
+
+    <label for="category" class="form-label mt-3">Category</label>
+    <select name="categoryId" id="category" class="form-control" [(ngModel)]="productData.categoryId">
+      <option value="0" selected>All</option>
+      <option value="{{op.id}}" *ngFor="let op of myCategory">{{op.name}}</option>
+    </select>
+
+    <label for="imgSrc" class="form-label mt-3">Image source</label>
+    <input type="text" name="imgSrc" id="imgSrc" ngModel #imgSrc="ngModel" class="form-control "
+      required="" [(ngModel)]="productData.images[0]" placeholder="Enter the product imgSrc">
+      <p *ngIf="imgSrc.errors?.['required']&&(imgSrc.touched||myform.submitted)" class="text-danger">imgSrc is required</p>
+
+    <div style="width: 200px; height: 200px;" class="my-3">
+
+      <img src="{{productData.images[0]}}" class="img-thumbnail">
+    </div>
+
+    <button class="btn btn-primary" >Save</button>
+  </form>
+</div> -->
+
+<!-- dash-bord -->
+
+<!--
+<div class="container">
+  <button class="btn btn-primary my-1" [routerLink]="['/product',0]" >Add product </button>
+  <hr>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Title</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of myproduct; let i=index">
+        <th scope="row">{{ i+1 }}</th>
+        <td>
+          <img [src]="p.images[0]" alt="{{p.title}}" class="img-thumbnail" width="80" height="80">
+        </td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.category?.name }}</td>
+        <td>{{ p.price }} $</td>
+        <td>
+          <button class="btn btn-sm btn-success me-2" [routerLink]="['/product',p.id]" >Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+import { Component, OnInit } from '@angular/core';
+import { DashBordServiceService } from '../../service/dash-bord-service.service';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from "@angular/router";
+
+
+@Component({
+  selector: 'app-project-dash-bord',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
+  templateUrl: './project-dash-bord.component.html',
+  styleUrl: './project-dash-bord.component.css'
+})
+export class ProjectDashBordComponent implements OnInit{
+  myproduct:any;
+
+  constructor(public service:DashBordServiceService){}
+  ngOnInit(): void {
+    console.log("ngOnInit called")
+    this.getAll();
+  }
+
+  getAll(){
+    this.service.getAllData().subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.myproduct=res;
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    }
+  )
+  }
+
+
+  deleteProduct(id:any){
+    this.service.deleteProduct(id).subscribe({
+      next:res=>{
+        this.myproduct=this.myproduct.filter((ele:any)=>ele.id!=id)
+      },
+      error:(err:any)=>{
+        console.log(err);
+      }
+    })
+  }
+} -->
+
+<!--service-->
+
+
+<!-- import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DashBordServiceService {
+  apiUrl:string;
+  categoryUrl:any;
+  products:any;
+  constructor(public http:HttpClient) {
+    this.apiUrl="https://api.escuelajs.co/api/v1/products";
+
+    this.categoryUrl=" https://api.escuelajs.co/api/v1/categories";
+  }
+
+  getAllData(){
+    return this.http.get(this.apiUrl);
+  }
+
+  deleteProduct(id:any){
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getProductById(id:any){
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  addproduct(product:any){
+    return this.http.post(this.apiUrl,product);
+  }
+
+  editProduct(product:any,id:any){
+    return this.http.put(`${this.apiUrl}/${id}`,product);
+  }
+
+  updateProduct(product:any){
+    this.getAllData().subscribe({
+      next:(res)=>{
+        this.products=res;
+      }
+    })
+    let index=this.products.findIndex((ele:any)=>ele.id==product.id);
+    if(index!=-1){
+      this.products[index]=product;
+    }
+  }
+
+  getAllCategory(){
+    return this.http.get(this.categoryUrl);
+  }
+
+
+} -->
+

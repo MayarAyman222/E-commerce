@@ -1,0 +1,31 @@
+<div class="cotainer">
+  <form class="form-group " #myform="ngForm" (ngSubmit)="onSubmit(myform)">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" name="title" id="title" ngModel #title="ngModel" class="form-control "
+      minlength="3" required="" [(ngModel)]="productData.title" placeholder="Enter the product Title">
+      <p *ngIf="title.errors?.['required']&&(title.touched||myform.submitted)" class="text-danger">Title is required</p>
+
+    <label for="price" class="form-label mt-3">Price</label>
+    <input type="number" name="price" id="price" ngModel #price="ngModel" class="form-control "
+      minlength="3" required="" [(ngModel)]="productData.price" placeholder="Enter the product price">
+      <p *ngIf="price.errors?.['required']&&(price.touched||myform.submitted)" class="text-danger">price is required</p>
+
+    <label for="category" class="form-label mt-3">Category</label>
+    <select name="categoryId" id="category" class="form-control" [(ngModel)]="productData.categoryId">
+      <option value="0" selected>All</option>
+      <option value="{{op.id}}" *ngFor="let op of myCategory">{{op.name}}</option>
+    </select>
+
+    <label for="imgSrc" class="form-label mt-3">Image source</label>
+    <input type="text" name="imgSrc" id="imgSrc" ngModel #imgSrc="ngModel" class="form-control "
+      required="" [(ngModel)]="productData.images[0]" placeholder="Enter the product imgSrc">
+      <p *ngIf="imgSrc.errors?.['required']&&(imgSrc.touched||myform.submitted)" class="text-danger">imgSrc is required</p>
+
+    <div style="width: 200px; height: 200px;" class="my-3">
+
+      <img src="{{productData.images[0]}}" class="img-thumbnail">
+    </div>
+
+    <button class="btn btn-primary" >Save</button>
+  </form>
+</div>
