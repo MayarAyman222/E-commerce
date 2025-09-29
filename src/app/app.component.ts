@@ -3,12 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { ProjectDashBordComponent } from './dashBord/component/project-dash-bord/project-dash-bord.component';
 import { ProductsListComponent } from './products/product-list/product-list.component';
 import { CartComponent } from './cart/cart.component';
+import { NavBarComponent } from './home/nav-bar/nav-bar.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,ProjectDashBordComponent,ProductsListComponent , CartComponent],
+  imports: [RouterOutlet,ProjectDashBordComponent,ProductsListComponent , CartComponent,NavBarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'ourShop';

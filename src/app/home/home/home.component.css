@@ -1,0 +1,24 @@
+
+.category-card {
+  border-radius: 20px;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #4a00e0, #e100ff);
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+
+.category-card img {
+  max-width: 100px;
+  margin-bottom: 10px;
+}
+
+.category-card h6 {
+  margin: 0;
+  font-weight: 600;
+}

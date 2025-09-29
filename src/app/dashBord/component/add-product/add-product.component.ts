@@ -33,9 +33,9 @@ myCategory:any;
     this.getAllCategory();
   if (this.productId != 0) {
     this.service.getProductById(this.productId).subscribe({
-      next: (res) => {console.log(res);
+      next: (res:any) => {console.log(res);
         this.productData = res
-        this.productData.categoryId = res
+        this.productData.categoryId = res.category.id
       },
       error: (err) => {alert("error")
         console.log("error")
