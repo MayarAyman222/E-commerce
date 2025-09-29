@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router, RouterLink } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Router, RouterLink, Route } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Product } from '../../interfaces/product';
 import { DashBordServiceService } from '../../dashBord/service/dash-bord-service.service';
 
@@ -21,10 +21,11 @@ export class ProductsListComponent implements OnInit {
   selectedCategory = 'all';
   loading = false;
   errorMsg = '';
+  @Input() data:any={};
 
   quantityMap: { [key: number]: number } = {};
 
-  constructor(private ps: DashBordServiceService, private router: Router) {}
+  constructor(private ps: DashBordServiceService,  private http :HttpClient) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -73,25 +74,26 @@ export class ProductsListComponent implements OnInit {
   onSearchChange() { this.applyFilters(); }
   clearSearch() { this.searchText = ''; this.applyFilters(); }
 
-  openProduct(p: Product) {
-    this.router.navigate(['/products', p.id]);
-  }
+  // openProduct(p: Product) {
+  //   this.router.navigate(['/products', p.id]);
+  // }
 
   
-  setQuantity(productId: number, qty: number) {
-    this.quantityMap[productId] = qty;
-  }
-
-
-  addProductToCart(product: Product) {
-    const quantity = this.quantityMap[product.id] || 1; 
-    this.ps.addToCart(1, product.id, quantity).subscribe({
-      next: () => {
-        console.log('Added to cart:', product.title, 'Qty:', quantity);
-        this.router.navigate(['/cart']);
-      },
-      error: err => console.error('Cart error:', err)
-    });
-  }
+ setQuantity(productId: number, qty: number) {
+  this.quantityMap[productId] = qty;
 }
+
+
+addToCart(productId: number) {
+  const qty = this.quantityMap[productId] || 1; // لو مفيش قيمة افتراضي = 1
+
+  this.http.get(`https://api.escuelajs.co/api/v1/products/${productId}`)
+    .subscribe((product: any) => {
+      this.ps.addToCart(product, qty); // ✅ نبعت الكمية هنا
+      console.log(`Added to cart: ${product.title}, Qty: ${qty}`);
+    });
+}
+ 
+}
+
 

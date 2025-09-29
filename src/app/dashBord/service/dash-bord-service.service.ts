@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Category, Product } from '../../interfaces/product';
 
 @Injectable({
@@ -11,11 +11,19 @@ export class DashBordServiceService {
   categoryUrl:any;
   products:any;
   cartUrl:string;
+  private cart: any[] = [];
+   private cartSubject = new BehaviorSubject<any[]>([]);
   constructor(public http:HttpClient) {
     this.apiUrl="https://api.escuelajs.co/api/v1/products";
 
     this.categoryUrl=" https://api.escuelajs.co/api/v1/categories";
-     this.cartUrl = "https://api.escuelajs.co/api/v1/carts";
+     this.cartUrl = "https://api.escuelajs.co/api/v1/orders/add-item";
+
+     const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      this.cart = JSON.parse(storedCart);
+      this.cartSubject.next([...this.cart]);
+    }
 
   }
 
@@ -54,16 +62,35 @@ export class DashBordServiceService {
   getAllCategory(): Observable <Category[]>{
     return this.http.get <any> (this.categoryUrl);
   }
- addToCart(userId: number, productId: number, quantity: number) {
-    const body = {
-      userId: userId,
-      products: [
-        { id: productId, quantity: quantity }
-      ]
-    };
-    return this.http.post(this.cartUrl, body);
+addToCart(product: any, quantity: number = 1) {
+  this.cart.push({ ...product, quantity }); // هنا بناخد الكمية اللي جاية
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+  this.cartSubject.next([...this.cart]);
+}
+getCart(): Observable<any[]> {
+  return this.cartSubject.asObservable();
+}
+
+  clearCart() {
+     this.cart = [];
+    localStorage.removeItem('cart');
+    this.cartSubject.next([]);
   }
- 
+
+ updateQuantity(productId: number, quantity: number) {
+  const item = this.cart.find(p => p.id === productId);
+  if (item) {
+    item.quantity = quantity;
+  }
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+  this.cartSubject.next([...this.cart]);  // ✅ تحديث
+}
+
+removeFromCart(productId: number) {
+  this.cart = this.cart.filter(item => item.id !== productId);
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+  this.cartSubject.next([...this.cart]); // ✅ لازم
+}
 
 
 }
