@@ -85,11 +85,11 @@ export class ProductsListComponent implements OnInit {
 
 
 addToCart(productId: number) {
-  const qty = this.quantityMap[productId] || 1; // لو مفيش قيمة افتراضي = 1
+  const qty = this.quantityMap[productId] || 1; 
 
   this.http.get(`https://api.escuelajs.co/api/v1/products/${productId}`)
     .subscribe((product: any) => {
-      this.ps.addToCart(product, qty); // ✅ نبعت الكمية هنا
+      this.ps.addToCart(product, qty);
       console.log(`Added to cart: ${product.title}, Qty: ${qty}`);
     });
 }
