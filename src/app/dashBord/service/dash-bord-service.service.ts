@@ -35,8 +35,8 @@ export class DashBordServiceService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  getProductById(id:any){
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getProductById(id:any): Observable<Product>{
+    return this.http.get <Product>(`${this.apiUrl}/${id}`);
   }
 
   addproduct(product:any){
@@ -63,7 +63,7 @@ export class DashBordServiceService {
     return this.http.get <any> (this.categoryUrl);
   }
 addToCart(product: any, quantity: number = 1) {
-  this.cart.push({ ...product, quantity }); // هنا بناخد الكمية اللي جاية
+  this.cart.push({ ...product, quantity }); 
   localStorage.setItem('cart', JSON.stringify(this.cart));
   this.cartSubject.next([...this.cart]);
 }
@@ -89,7 +89,7 @@ getCart(): Observable<any[]> {
 removeFromCart(productId: number) {
   this.cart = this.cart.filter(item => item.id !== productId);
   localStorage.setItem('cart', JSON.stringify(this.cart));
-  this.cartSubject.next([...this.cart]); // ✅ لازم
+  this.cartSubject.next([...this.cart]); 
 }
 
 
