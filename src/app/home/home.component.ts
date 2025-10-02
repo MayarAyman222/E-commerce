@@ -14,6 +14,8 @@ import { DashBordServiceService } from '../dashBord/service/dash-bord-service.se
 export class HomeComponent implements OnInit {
   categoryList:any;
   checkedcategory:any;
+ 
+
   constructor(public service:DashBordServiceService,public router:Router){
 
   }
@@ -36,6 +38,8 @@ onClick(c:any){
   this.checkedcategory=c;
   this.router.navigate(['/products'], { queryParams: { category: c.name } });
 }
-
+hideProduct(product: any) {
+  product.show = false;
+}
 
 }

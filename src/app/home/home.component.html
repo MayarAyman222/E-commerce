@@ -128,18 +128,20 @@
   <h3 class="text-center fw-bold mb-5">SHOP BY CATEGORY</h3>
   <div class="row g-4">
 
-  <div class="card" style="width: 18rem;" *ngFor="let c of categoryList" (click)="onClick(c)" >
-  <img src="{{c.image}}" class="card-img-top" alt="...">
+  <div class="card" style="width: 18rem;" *ngFor="let c of categoryList" (click)="onClick(c)"> 
+  <img src="{{c.image}}" class="card-img-top" alt="..." >
   <div class="card-body">
     <h5 class="card-title">{{c.name}}</h5>
   </div>
+   </div>
+   
 </div>
   </div>
 </div>
 
 
 
-  </div>
+ 
 
 
 
@@ -149,7 +151,7 @@
 
       <!-- العمود الأول -->
       <div class="col-md-3 mb-3">
-        <h5 class="fw-bold">ELASY Store</h5>
+        <h5 class="fw-bold">SHOP Store</h5>
         <p>
           We provide the latest and most powerful PC components, accessories,
           and peripherals to build your dream setup.

@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DashBordServiceService } from '../../service/dash-bord-service.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { title } from 'process';
-
+declare var bootstrap: any;
 @Component({
   selector: 'app-add-product',
   standalone: true,
@@ -22,7 +22,8 @@ export class AddProductComponent implements OnInit {
   images: [""]
 }
 myCategory:any;
-
+  @ViewChild('saveToast', { static: true }) saveToast!: ElementRef;
+  saveMessage = '';
   constructor(public service:DashBordServiceService,public activatedRoat:ActivatedRoute,public router:Router){
     this.productId = Number(this.activatedRoat.snapshot.params['id']);
 
@@ -91,6 +92,19 @@ onSubmit(form: any) {
     }
   }
 }
+ saveData() {
+    // هنا منطق الحفظ (استدعاء API أو خدمة)
+    console.log('Saving data...');
 
+    // بعد ما يتم الحفظ
+    this.saveMessage = 'تم الحفظ بنجاح ✅';
+    this.showSaveToast();
+  }
+
+  showSaveToast() {
+    const toastEl = this.saveToast.nativeElement;
+    const toast = new bootstrap.Toast(toastEl, { delay: 2000 });
+    toast.show();
+  }
 
 }

@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit , ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router, RouterLink, Route, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Product } from '../../interfaces/product';
 import { DashBordServiceService } from '../../dashBord/service/dash-bord-service.service';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-products-list',
@@ -22,6 +23,8 @@ export class ProductsListComponent implements OnInit {
   loading = false;
   errorMsg = '';
   @Input() data:any={};
+    @ViewChild('liveToast', { static: true }) liveToast!: ElementRef;
+  toastMessage = '';
 
   quantityMap: { [key: number]: number } = {};
 
@@ -97,9 +100,16 @@ addToCart(productId: number) {
     .subscribe((product: any) => {
       this.ps.addToCart(product, qty);
       console.log(`Added to cart: ${product.title}, Qty: ${qty}`);
+       this.toastMessage = `${product.title} Added to cart(${qty}) ✅`;
+        this.showToast();
     });
 }
 
+ showToast() {
+    const toastEl = this.liveToast.nativeElement;
+    const toast = new bootstrap.Toast(toastEl, { delay: 2000 });
+    toast.show();
+  }
 }
 
 

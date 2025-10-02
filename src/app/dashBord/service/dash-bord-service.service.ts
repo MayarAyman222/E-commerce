@@ -62,11 +62,23 @@ export class DashBordServiceService {
   getAllCategory(): Observable <Category[]>{
     return this.http.get <any> (this.categoryUrl);
   }
+// addToCart(product: any, quantity: number = 1) {
+//   this.cart.push({ ...product, quantity }); 
+//   localStorage.setItem('cart', JSON.stringify(this.cart));
+//   this.cartSubject.next([...this.cart]);
+// }
 addToCart(product: any, quantity: number = 1) {
-  this.cart.push({ ...product, quantity }); 
+  let existing = this.cart.find(item => item.id === product.id);
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    this.cart.push({ ...product, quantity });
+  }
   localStorage.setItem('cart', JSON.stringify(this.cart));
   this.cartSubject.next([...this.cart]);
 }
+
+
 getCart(): Observable<any[]> {
   return this.cartSubject.asObservable();
 }
@@ -75,6 +87,7 @@ getCart(): Observable<any[]> {
      this.cart = [];
     localStorage.removeItem('cart');
     this.cartSubject.next([]);
+
   }
 
  updateQuantity(productId: number, quantity: number) {

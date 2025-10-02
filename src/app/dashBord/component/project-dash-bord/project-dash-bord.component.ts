@@ -13,6 +13,7 @@ import { RouterLink } from "@angular/router";
 })
 export class ProjectDashBordComponent implements OnInit{
   myproduct:any;
+
   
   constructor(public service:DashBordServiceService){}
   ngOnInit(): void {
@@ -44,6 +45,7 @@ export class ProjectDashBordComponent implements OnInit{
       }
     })
   }
+  
 }
 
 
