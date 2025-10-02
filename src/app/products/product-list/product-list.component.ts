@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router, RouterLink, Route } from '@angular/router';
+import { RouterModule, Router, RouterLink, Route, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Product } from '../../interfaces/product';
 import { DashBordServiceService } from '../../dashBord/service/dash-bord-service.service';
@@ -25,11 +25,17 @@ export class ProductsListComponent implements OnInit {
 
   quantityMap: { [key: number]: number } = {};
 
-  constructor(private ps: DashBordServiceService,  private http :HttpClient) {}
+  constructor(private ps: DashBordServiceService,  private http :HttpClient,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadCategories();
     this.loadProducts();
+    this.route.queryParams.subscribe(params => {
+    if (params['category']) {
+      this.selectedCategory = params['category'];
+      this.applyFilters();
+    }
+  });
   }
 
   loadProducts() {
@@ -78,14 +84,14 @@ export class ProductsListComponent implements OnInit {
   //   this.router.navigate(['/products', p.id]);
   // }
 
-  
+
  setQuantity(productId: number, qty: number) {
   this.quantityMap[productId] = qty;
 }
 
 
 addToCart(productId: number) {
-  const qty = this.quantityMap[productId] || 1; 
+  const qty = this.quantityMap[productId] || 1;
 
   this.http.get(`https://api.escuelajs.co/api/v1/products/${productId}`)
     .subscribe((product: any) => {
@@ -93,7 +99,7 @@ addToCart(productId: number) {
       console.log(`Added to cart: ${product.title}, Qty: ${qty}`);
     });
 }
- 
+
 }
 
 

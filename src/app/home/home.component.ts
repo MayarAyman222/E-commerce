@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   }
 onClick(c:any){
   this.checkedcategory=c;
-  this.router.navigate(['/productList'], { queryParams: { category: c.name } });
+  this.router.navigate(['/products'], { queryParams: { category: c.name } });
 }
 
 
