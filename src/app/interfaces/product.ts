@@ -2,6 +2,8 @@ export interface Category {
   id: number;
   name: string;
   image: string;
+   hasValidImage?: boolean;
+   loading?: boolean; 
 }
 
 export interface Product {

@@ -128,13 +128,18 @@
   <h3 class="text-center fw-bold mb-5">SHOP BY CATEGORY</h3>
   <div class="row g-4">
 
-  <div class="card" style="width: 18rem;" *ngFor="let c of categoryList" (click)="onClick(c)"> 
-  <img src="{{c.image}}" class="card-img-top" alt="..." >
-  <div class="card-body">
-    <h5 class="card-title">{{c.name}}</h5>
+<ng-container *ngFor="let c of categoryList">
+  <div class="card" style="width: 18rem;"
+       (click)="onClick(c)"
+       *ngIf="c.hasValidImage">
+    <img [src]="c.image" class="card-img-top" alt="{{c.name}}">
+    <div class="card-body">
+      <h5 class="card-title">{{c.name}}</h5>
+    </div>
   </div>
-   </div>
-   
+</ng-container>
+
+
 </div>
   </div>
 </div>
