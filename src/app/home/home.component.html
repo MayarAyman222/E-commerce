@@ -1,0 +1,197 @@
+
+
+<div class="container my-5">
+  <h4 class="mb-4">Product Inventory</h4>
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner  " >
+    <div class="carousel-item active">
+      <img src="" class="d-block w-100" >
+    </div>
+    <div class="carousel-item">
+      <img src="" class="d-block w-100" >
+    </div>
+    <div class="carousel-item">
+      <img src="" class="d-block w-100" >
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div id="multiItemCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+  <div class="carousel-inner">
+
+    <!-- الصف الأول -->
+    <div class="carousel-item active">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.17_34e7a2a3.jpg" class="d-block w-100" alt="صورة 1">
+        </div>
+        <div class="col-md-3">
+          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.21_318b0226.jpg" class="d-block w-100" alt="صورة 2">
+        </div>
+        <div class="col-md-3">
+          <img src="/assets/WhatsApp Image 2025-10-02 at 09.42.21_4f11c837.jpg" class="d-block w-100" alt="صورة 3">
+        </div>
+        <div class="col-md-3">
+          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.21_520552d9.jpg" class="d-block w-100" alt="صورة 4">
+        </div>
+      </div>
+    </div>
+
+    <!-- الصف الثاني -->
+    <div class="carousel-item">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.21_baf3d543.jpg" class="d-block w-100" alt="صورة 5">
+        </div>
+        <div class="col-md-3">
+          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.22_967d87ae.jpg" class="d-block w-100" alt="صورة 6">
+        </div>
+        <div class="col-md-3">
+          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.22_deb27b25.jpg" class="d-block w-100" alt="صورة 7">
+        </div>
+        <div class="col-md-3">
+          <img src="assets/smartwatch.jpeg" class="d-block w-100" alt="صورة 8">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- أزرار التحكم -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#multiItemCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#multiItemCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+<div class="container text-center my-5">
+  <h3>Why Shop With Us?</h3>
+  <div class="row mt-4">
+    <div class="col-md-3">
+      <div class="card p-3">
+        <div class="mb-3">
+          <i class="bi-truck" style="font-size: 2rem;"></i>
+        </div>
+        <h5>Fast Shipping</h5>
+        <p>Quick and reliable delivery to your doorstep.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <div class="mb-3">
+          <i class="bi-shield-check" style="font-size: 2rem;"></i>
+        </div>
+        <h5>100% Genuine</h5>
+        <p>We guarantee authentic products only.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <div class="mb-3">
+          <i class="bi-headset" style="font-size: 2rem;"></i>
+        </div>
+        <h5>24/7 Support</h5>
+        <p>Our team is always ready to help you out.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3">
+        <div class="mb-3">
+          <i class="bi-star" style="font-size: 2rem;"></i>
+        </div>
+        <h5>Top Rated</h5>
+        <p> Loved by thousands of satisfied customers.</p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 p-4 bg-dark text-white">
+    <h4>Ready to Upgrade Your Setup?</h4>
+    <p>Explore our wide range of products and find the perfect match for your needs.</p>
+    <button class="btn btn-primary" [routerLink]="['/products']">Start Shopping</button>
+  </div>
+</div>
+
+
+
+<div class="container py-5">
+  <h3 class="text-center fw-bold mb-5">SHOP BY CATEGORY</h3>
+  <div class="row g-4">
+
+  <div class="card" style="width: 18rem;" *ngFor="let c of categoryList" (click)="onClick(c)" >
+  <img src="{{c.image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{c.name}}</h5>
+  </div>
+</div>
+  </div>
+</div>
+
+
+
+  </div>
+
+
+
+<footer class="bg-dark text-light pt-5 pb-3" id="footer">
+  <div class="container">
+    <div class="row">
+
+      <!-- العمود الأول -->
+      <div class="col-md-3 mb-3">
+        <h5 class="fw-bold">ELASY Store</h5>
+        <p>
+          We provide the latest and most powerful PC components, accessories,
+          and peripherals to build your dream setup.
+        </p>
+      </div>
+
+      <!-- العمود الثاني -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Shop</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-light text-decoration-none">All Products</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Categories</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Best Sellers</a></li>
+          <li><a href="#" class="text-light text-decoration-none">New Arrivals</a></li>
+        </ul>
+      </div>
+
+      <!-- العمود الثالث -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Customer Service</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-light text-decoration-none">Contact Us</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Shipping Info</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Returns & Refunds</a></li>
+          <li><a href="#" class="text-light text-decoration-none">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- العمود الرابع -->
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Follow Us</h6>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-light fs-4"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-light fs-4"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-light fs-4"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="text-light fs-4"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- الخط الفاصل -->
+    <hr class="border-light">
+  </div>
+</footer>

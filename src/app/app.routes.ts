@@ -4,12 +4,15 @@ import { ProjectDashBordComponent } from './dashBord/component/project-dash-bord
 import { ProductsListComponent } from './products/product-list/product-list.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailComponent } from './product-details/product-details.component';
+import { HomeComponent } from './home/home.component';
 export const routes: Routes = [
-  {path:"product/:id",component:AddProductComponent},
+  {path:"addProduct/:id",component:AddProductComponent},
   {path:"dashBord",component:ProjectDashBordComponent},
   {path:"cart",component:CartComponent},
-  {path:"",component:ProductsListComponent},
-  {path : "product/:id" , component : ProductDetailComponent}
+  {path:"products",component:ProductsListComponent},
+  {path : "product/:id" , component :ProductDetailComponent},
+  {path:"home",component:HomeComponent},
+  {path:'',component:HomeComponent}
 
 
 
