@@ -69,10 +69,10 @@
           
         <input type="number" min="1" [(ngModel)]="quantityMap[p.id]" class="form-control mb-2" placeholder="Quantity">
             </div>
-        <button class="btn btn-success w-50" (click)="addToCart(p.id)">
+        <button class="btn btn-success w-100 " (click)="addToCart(p.id)">
           Add to Cart
         </button>
-        <button class="btn btn-primary" [routerLink]="['/product', p.id]">View Product</button> 
+        <button class="btn btn-primary w-100 mt-1" [routerLink]="['/product', p.id]">View Product</button> 
       
          </div>
       </div>

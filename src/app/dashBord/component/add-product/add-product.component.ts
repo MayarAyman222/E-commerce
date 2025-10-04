@@ -36,7 +36,7 @@ myCategory:any;
     this.service.getProductById(this.productId).subscribe({
       next: (res) => {console.log(res);
         this.productData = res
-        this.productData.categoryId = res
+        this.productData.categoryId = res.category.id;
       },
       error: (err) => {alert("error")
         console.log("error")
@@ -50,9 +50,10 @@ myCategory:any;
 }
 getAllCategory(){
     this.service.getAllCategory().subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         console.log(res);
         this.myCategory=res;
+        this.productData.categoryId = res.category.id;
       },
       error:(err)=>{
         console.log(err);

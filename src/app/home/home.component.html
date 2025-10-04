@@ -1,6 +1,6 @@
 
 
-<div class="container my-5">
+<div class="container my-5 text-center">
   <h4 class="mb-4">Product Inventory</h4>
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner  " >
@@ -15,57 +15,74 @@
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
     <span class="visually-hidden">Next</span>
   </button>
 </div>
 
-<div id="multiItemCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+<div id="multiItemCarousel" class="carousel slide mt-5" data-bs-ride="carousel" data-bs-interval="3000">
   <div class="carousel-inner">
 
-    
+    <!-- الصف الأول -->
     <div class="carousel-item active">
       <div class="row">
         <div class="col-md-3">
-          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.17_34e7a2a3.jpg" class="d-block w-100" alt="صورة 1">
+          <img src="assets/f1.jpeg" class="d-block w-100 test" alt="صورة 1">
         </div>
         <div class="col-md-3">
-          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.21_318b0226.jpg" class="d-block w-100" alt="صورة 2">
+          <img src="assets/f2.jpeg" class="d-block w-100 test" alt="صورة 2">
         </div>
         <div class="col-md-3">
-          <img src="/assets/WhatsApp Image 2025-10-02 at 09.42.21_4f11c837.jpg" class="d-block w-100" alt="صورة 3">
+          <img src="assets/f3.jpeg" class="d-block w-100 test" alt="صورة 3">
         </div>
         <div class="col-md-3">
-          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.21_520552d9.jpg" class="d-block w-100" alt="صورة 4">
+          <img src="assets/f4.jpeg" class="d-block w-100 test" alt="صورة 4">
         </div>
       </div>
     </div>
 
-  
+    <!-- الصف الثاني -->
     <div class="carousel-item">
       <div class="row">
         <div class="col-md-3">
-          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.21_baf3d543.jpg" class="d-block w-100" alt="صورة 5">
+          <img src="assets/t1.jpeg" class="d-block w-100 test" alt="صورة 5">
         </div>
         <div class="col-md-3">
-          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.22_967d87ae.jpg" class="d-block w-100" alt="صورة 6">
+          <img src="assets/t2.jpeg" class="d-block w-100 test" alt="صورة 6">
         </div>
         <div class="col-md-3">
-          <img src="assets/WhatsApp Image 2025-10-02 at 09.42.22_deb27b25.jpg" class="d-block w-100" alt="صورة 7">
+          <img src="assets/t6.jpeg" class="d-block w-100 test" alt="صورة 7">
         </div>
         <div class="col-md-3">
-          <img src="assets/smartwatch.jpeg" class="d-block w-100" alt="صورة 8">
+          <img src="assets/t4.jpeg" class="d-block w-100 test" alt="صورة 8">
+        </div>
+      </div>
+    </div>
+    
+     <div class="carousel-item">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="assets/s1.jpeg" class="d-block w-100 test" alt="صورة 5" >
+        </div>
+        <div class="col-md-3">
+          <img src="assets/s2.jpeg" class="d-block w-100 test" alt="صورة 6">
+        </div>
+        <div class="col-md-3">
+          <img src="assets/s3 .jpeg" class="d-block w-100 test" alt="صورة 7">
+        </div>
+        <div class="col-md-3">
+          <img src="assets/s4.jpeg" class="d-block w-100 test" alt="صورة 8">
         </div>
       </div>
     </div>
 
   </div>
 
-  
+  <!-- أزرار التحكم -->
   <button class="carousel-control-prev" type="button" data-bs-target="#multiItemCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </button>
@@ -73,9 +90,9 @@
     <span class="carousel-control-next-icon"></span>
   </button>
 </div>
+<br><br><br><br>
 
-
-<div class="container text-center my-5">
+<div class="container text-center mt-5">
   <h3>Why Shop With Us?</h3>
   <div class="row mt-4">
     <div class="col-md-3">
@@ -121,14 +138,15 @@
     <button class="btn btn-primary" [routerLink]="['/products']">Start Shopping</button>
   </div>
 </div>
+<br><br><br><br>
 
 
-
-<div class="container py-5">
+<div class="container py-5 ">
   <h3 class="text-center fw-bold mb-5">SHOP BY CATEGORY</h3>
   <div class="row g-4">
 
 <ng-container *ngFor="let c of categoryList">
+  
   <div class="card" style="width: 18rem;"
        (click)="onClick(c)"
        *ngIf="c.hasValidImage">

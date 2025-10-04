@@ -102,6 +102,9 @@ addToCart(productId: number) {
       console.log(`Added to cart: ${product.title}, Qty: ${qty}`);
        this.toastMessage = `${product.title} Added to cart(${qty}) ✅`;
         this.showToast();
+              this.quantityMap[productId] = 1;
+
+        
     });
 }
 
