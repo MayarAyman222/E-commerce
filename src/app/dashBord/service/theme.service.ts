@@ -14,7 +14,7 @@ export class ThemeService {
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    // نتحقق إننا شغالين في الـ browser
+
     if (isPlatformBrowser(this.platformId)) {
       const saved = localStorage.getItem(this.darkKey);
       const isDark = saved === 'true';
