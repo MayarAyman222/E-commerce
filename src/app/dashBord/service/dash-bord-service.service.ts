@@ -96,7 +96,7 @@ getCart(): Observable<any[]> {
     item.quantity = quantity;
   }
   localStorage.setItem('cart', JSON.stringify(this.cart));
-  this.cartSubject.next([...this.cart]);  // ✅ تحديث
+  this.cartSubject.next([...this.cart]);   
 }
 
 removeFromCart(productId: number) {
