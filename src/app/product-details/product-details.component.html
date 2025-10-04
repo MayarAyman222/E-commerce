@@ -1,4 +1,4 @@
-<div class="container py-4" *ngIf="!loading">
+<!--<div class="container py-4" *ngIf="!loading">
   
   <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
 <h2 class="text-center">Product Details</h2>
@@ -42,6 +42,83 @@
 </div>
 
 modal 
+<div class="image-modal" *ngIf="imageModalOpen" (click)="closeModal()">
+  <img [src]="selectedImage" class="image-modal-img" alt="large view">
+</div>
+-->
+<div class="container py-5" *ngIf="!loading">
+  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+
+  <div *ngIf="product" class="row g-4 align-items-start">
+    <!-- Left Side: Images -->
+    <div class="col-md-6">
+      <div class="card shadow-sm bg-light text-center " >
+        <img [src]="selectedImage" 
+             class="img-fluid mb-3 main-image rounded"
+             (click)="openImage(selectedImage)"
+             alt="{{product?.title}}">
+
+        <!-- Thumbnails -->
+        <div class="d-flex justify-content-center gap-4">
+          <img *ngFor="let img of product?.images" 
+               [src]="img" 
+               class="thumb rounded"
+               [class.selected-thumb]="img === selectedImage"
+               (click)="selectedImage = img"
+               alt="{{product?.title}} thumbnail">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Details -->
+    <div class="col-md-6">
+      <div class="card shadow-sm bg-light text-primary  " style="height: 620px; padding:90px">
+        <!-- Title -->
+        <h3 class="fw-bold text-purple">{{ product?.title }}</h3>
+        
+        <!-- Short Description -->
+        <p class="text-primary">
+          Soft and comfortable cotton fabric Crew neck and short sleeves Comfortable, regular fit Wash according to care label instructions
+        </p>
+
+        <!-- Brand -->
+        <p><strong>Brand:</strong> {{ product?.category?.name }}</p>
+
+        <!-- Price -->
+        <div class="fs-3 fw-bold text-pink mb-3">
+          {{ product?.price }} EGP
+        </div>
+
+        <!-- Rating -->
+        <div class="mb-3">
+          <span class="text-warning">★</span>
+          <span class="text-warning">★</span>
+          <span class="text-warning">☆</span>
+          <small class="ms-2">(6)</small>
+        </div>
+
+        <!-- Buttons & Labels -->
+        <div class="d-flex flex-column gap-3">
+          <button class="btn btn-gradient fw-bold">
+            <i class="bi bi-cart-plus"></i> Add to Cart
+          </button>
+
+          <div class="d-flex gap-2">
+            <span class="badge bg-danger">Free Shipping</span>
+            <span class="badge bg-success">In Stock</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Spinner -->
+<div *ngIf="loading" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<!-- Modal for Image Preview -->
 <div class="image-modal" *ngIf="imageModalOpen" (click)="closeModal()">
   <img [src]="selectedImage" class="image-modal-img" alt="large view">
 </div>

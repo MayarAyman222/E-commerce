@@ -4,7 +4,8 @@ import { ProjectDashBordComponent } from './dashBord/component/project-dash-bord
 import { ProductsListComponent } from './products/product-list/product-list.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailComponent } from './product-details/product-details.component';
-import { NavBarComponent } from "./nav-bar/nav-bar.component";
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ThemeService } from './dashBord/service/theme.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,5 +14,7 @@ import { NavBarComponent } from "./nav-bar/nav-bar.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+    constructor(public theme: ThemeService) {
+    }
   title = 'ourShop';
 }

@@ -25,16 +25,15 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
       this.getAllCategory()
      this.service.getAllCategory().subscribe((data: Category[]) => {
-    // مبدئياً الكروت مش ظاهرة (hasValidImage = false)
+   
     this.categoryList = data.map(c => ({ ...c, hasValidImage: false }));
 
     this.categoryList.forEach((cat, index) => {
       this.checkImage(cat.image).then(ok => {
         if (ok) {
-          // أول ما الصورة تتأكد، نخلي الكارت ظاهر
           this.categoryList[index] = { ...cat, hasValidImage: true };
         } else {
-          // لو بايظة نشيله من الليست
+          
           this.categoryList.splice(index, 1);
         }
       });

@@ -1,0 +1,57 @@
+/* default (light) */
+:root{
+  --bg: #ffffff;
+  --text: #212529;
+  --card-bg: #ffffff;
+  --muted: #6c757d;
+  --input-bg: #ffffff;
+  --btn-bg: #ffffff;
+}
+
+/* dark overrides */
+.dark-mode {
+  --bg: #0f1113;
+  --text: #e9eef6;
+  --card-bg: #1b1f23;
+  --muted: #9aa6b2;
+  --input-bg: #121317;
+  --btn-bg: #222427;
+}
+
+/* apply variables globally */
+body{
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color .25s ease, color .25s ease;
+}
+
+/* navbar (example) — your existing classes will still work */
+.navbar {
+  background-color: var(--card-bg) !important;
+  transition: background-color .25s ease;
+}
+
+/* links and nav items */
+.nav-link, .navbar-brand {
+  color: var(--text) !important;
+}
+
+/* form controls */
+.form-control {
+  background-color: var(--input-bg) !important;
+  color: var(--text) !important;
+  border-color: rgba(0,0,0,0.08);
+}
+
+/* btn-light fallback */
+.btn-light {
+  background-color: var(--btn-bg) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* outline btn tweak in dark */
+.dark-mode .btn-outline-secondary {
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}

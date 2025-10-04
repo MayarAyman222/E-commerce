@@ -1,0 +1,52 @@
+/* Main product image */
+.main-image {
+   width: 100%;     
+ /* height: auto;   */   
+  object-fit: cover; 
+  border-radius: 12px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+/* Thumbnails */
+.thumb {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+.thumb:hover,
+.selected-thumb {
+  border: 2px solid #ff00cc;
+  transform: scale(1.05);
+}
+
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  transition: 0.3s;
+}
+.btn-gradient:hover {
+  opacity: 0.9;
+}
+
+/* Modal Image */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+.image-modal-img {
+  max-height: 80%;
+  max-width: 90%;
+  border-radius: 12px;
+}
